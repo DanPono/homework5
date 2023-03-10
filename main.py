@@ -94,6 +94,19 @@ class Reviewer(Mentor):
     def __str__(self):
         return f'Имя: {self.name}\nФамилия: {self.surname}'
 
+def average_grade_for_course_students(students, course):
+    grades = []
+    for student in students:
+        if course in student.grades:
+            grades += student.grades[course]
+    return sum(grades) / len(grades) if len(grades) != 0 else 0
+
+def average_grade_for_course_lecturers(lecturers, course):
+    grades = []
+    for lecturer in lecturers:
+        if course in lecturer.grades:
+            grades += lecturer.grades[course]
+    return sum(grades) / len(grades) if len(grades) != 0 else 0
 
 def example1():
     best_student = Student('Ruoy', 'Eman', 'your_gender')
@@ -168,8 +181,16 @@ def example3():
         print(lecturer)
         print()
 
+    # calculate the average grade for all students in the Python course
+    python_course_grade = average_grade_for_course_students(students, 'Course1')
+    print(f'The average grade for all students in the Course1 course is {python_course_grade:.1f}')
+
+    # calculate the average grade for all lecturers in the Python course
+    python_course_lecturer_grade = average_grade_for_course_lecturers(lecturers, 'Course1')
+    print(f'The average grade for all lecturers in the Course1 course is {python_course_lecturer_grade:.1f}')
+
 
 if __name__ == '__main__':
-    # example1()
-    # example2()
+    example1()
+    example2()
     example3()
